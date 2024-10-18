@@ -13,5 +13,9 @@ body {
     background-color: #101820;
     font-family: 'Montserrat', bold, sans-serif;
     overflow: hidden;
+   
+        touch-action: pan-y; 
+      
+      
 }
 

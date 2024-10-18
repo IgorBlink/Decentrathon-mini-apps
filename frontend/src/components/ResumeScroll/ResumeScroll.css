@@ -1,0 +1,157 @@
+.resume-container {
+  display: flex;
+  justify-content: center; /* Центрирование по горизонтали */
+  align-items: center; /* Центрирование по вертикали */
+  height: 100vh; /* Высота полного экрана */
+  position: relative;
+  overflow: hidden;
+}
+
+.resume-card {
+  background: linear-gradient(135deg, #1d1f21, #292b2c);
+  color: #fff;
+  padding: 20px;
+  border-radius: 20px;
+  text-align: center;
+  width: 300px; /* Задайте ширину карточки */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  position: relative;
+  transition: transform 0.1s ease-out; /* Плавный переход */
+}
+
+.resume-card:hover {
+  transform: scale(1.05); /* Увеличение при наведении */
+}
+
+.swipe-indicator {
+  position: absolute;
+  top: 20%;
+  font-size: 5rem;
+  color: white;
+  transition: opacity 0.3s ease;
+  opacity: 0; /* Начальное состояние - скрыто */
+}
+
+.swipe-indicator.left {
+  left: 10%;
+  opacity: 1; /* Показать только если свайп влево */
+  animation: shake 0.5s ease; /* Добавление анимации при дизлайке */
+}
+
+.swipe-indicator.right {
+  right: 10%;
+  opacity: 1; /* Показать только если свайп вправо */
+  animation: pulse 0.5s ease; /* Добавление анимации при лайке */
+}
+
+@keyframes shake {
+  0% { transform: translate(0); }
+  25% { transform: translate(-5px); }
+  50% { transform: translate(5px); }
+  75% { transform: translate(-5px); }
+  100% { transform: translate(0); }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+.resume-card.like {
+  background: rgba(0, 255, 0, 0.3); /* Светло-зеленый фон при лайке */
+  transition: background 0.3s ease; /* Плавный переход фона */
+}
+
+.resume-card.dislike {
+  background: rgba(255, 0, 0, 0.3); /* Светло-красный фон при дизлайке */
+  transition: background 0.3s ease; /* Плавный переход фона */
+}
+
+.avatar {
+  width: 80px; /* Уменьшите размер изображения */
+  height: 80px;
+  border-radius: 50%; /* Закругляем изображение */
+  margin-bottom: 10px; /* Отступ снизу */
+}
+
+.skills-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 10px; /* Отступ сверху */
+}
+
+.skill {
+  background: linear-gradient(135deg, #ff7e5f, #feb47b);
+  color: #fff;
+  border-radius: 15px;
+  padding: 5px 10px;
+  margin: 5px; /* Отступ между навыками */
+  font-size: 12px; /* Уменьшите шрифт для навыков */
+}
+
+.hint-overlay {
+  position: fixed; /* Фиксированное позиционирование */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8); /* Темный фон с прозрачностью */
+  display: flex;
+  flex-direction: column; /* Вертикальное расположение */
+  align-items: center; /* Центрирование по горизонтали */
+  justify-content: center; /* Центрирование по вертикали */
+  z-index: 10; /* Поверх всех элементов */
+  opacity: 0; /* Начальное состояние - скрыто */
+  animation: fadeIn 0.5s forwards; /* Плавное появление оверлея */
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.hint-content {
+  text-align: center;
+  color: white; /* Цвет текста */
+}
+
+.arrow {
+  font-size: 3rem; /* Размер стрелки */
+  margin: 20px; /* Отступ между стрелками и текстом */
+  animation: pulse 1s infinite; /* Пульсация стрелок */
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.hint-text {
+  font-size: 1.5rem; /* Размер текста подсказки */
+  margin: 5px; /* Отступ между текстом и стрелками */
+  animation: slideIn 0.5s forwards; /* Появление текста с эффектом сдвига */
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
