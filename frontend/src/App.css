@@ -1,16 +1,17 @@
 .mobile-container {
-  width: 100vw;
-  height: 100vh;
-  max-width: 400px; /* Typical width for mobile devices */
-  margin: 0 auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #101820; /* Background color for the page */
+    width: 100vw;
+    height: 100vh;
+    max-width: 400px; /* Typical width for mobile devices */
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #101820; /* Background color for the page */
 }
-body{
-  background-color: #101820;
-  font-family: 'Montserrat', bold;
-  overflow: hidden;
+
+body {
+    background-color: #101820;
+    font-family: 'Montserrat', bold, sans-serif;
+    overflow: hidden;
 }
 

@@ -1,89 +1,88 @@
 /* Mobile container to simulate mobile screen dimensions */
 
 
-  
 .welcome-container {
-  text-align: center;
-  background-color: #101820;
-  padding: 20px;
-  border-radius: 12px;
-  color: #fff;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100vh; /* Full viewport height */
+    text-align: center;
+    background-color: #101820;
+    padding: 20px;
+    border-radius: 12px;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh; /* Full viewport height */
 }
-  
+
 .welcome-title {
-  font-size: 2.3rem;
-  margin-bottom: 20px;
-  position: relative;
-  top: -10vh; /* Adjust with vh for dynamic movement */
-  animation: slideDown 1s ease-in-out;
+    font-size: 2.3rem;
+    margin-bottom: 20px;
+    position: relative;
+    top: -10vh; /* Adjust with vh for dynamic movement */
+    animation: slideDown 1s ease-in-out;
 }
 
 .welcome-image img {
-  width: 200px;
-  height: auto;
-  position: relative;
-  top: -5vh;
-  animation: bounceIn 2s ease-in-out;
+    width: 200px;
+    height: auto;
+    position: relative;
+    top: -5vh;
+    animation: bounceIn 2s ease-in-out;
 }
 
 .welcome-text {
-  font-size: 1.2rem;
-  margin-top: 20px;
-  position: relative;
-  top: -3vh;
-  font-family: 'Montserrat', bold;
-  animation: slideDown 1s ease-in-out;
-  max-width: 300px;
-  animation: fadeInText 2.5s ease-in-out;
+    font-size: 1.2rem;
+    margin-top: 20px;
+    position: relative;
+    top: -3vh;
+    font-family: 'Montserrat', bold, serif;
+    max-width: 300px;
+    animation: fadeInText 2.5s ease-in-out;
 }
-  
-  /* Keyframe animations remain the same */
-  @keyframes fadeIn {
+
+/* Keyframe animations remain the same */
+@keyframes fadeIn {
     from {
-      opacity: 0;
+        opacity: 0;
     }
     to {
-      opacity: 1;
+        opacity: 1;
     }
-  }
-  
-  @keyframes slideDown {
+}
+
+@keyframes slideDown {
     from {
-      transform: translateY(-50px);
-      opacity: 0;
+        transform: translateY(-50px);
+        opacity: 0;
     }
     to {
-      transform: translateY(0);
-      opacity: 1;
+        transform: translateY(0);
+        opacity: 1;
     }
-  }
-  
-  @keyframes bounceIn {
+}
+
+@keyframes bounceIn {
     0% {
-      transform: scale(0.5);
-      opacity: 0;
+        transform: scale(0.5);
+        opacity: 0;
     }
     100% {
-      transform: scale(1);
-      opacity: 1;
+        transform: scale(1);
+        opacity: 1;
     }
-  }
-  
-  @keyframes fadeInText {
+}
+
+@keyframes fadeInText {
     from {
-      opacity: 0;
+        opacity: 0;
     }
     to {
-      opacity: 1;
+        opacity: 1;
     }
-  }
-  .continue-button, .back-button {
+}
+
+.continue-button, .back-button {
     padding: 15px 30px; /* Увеличенные размеры */
     width: 75%; /* Ширина 75% от родительского контейнера */
     background-color: #0088cc; /* Telegram blue color */
@@ -98,11 +97,11 @@
     transition: background 0.3s ease, transform 0.3s ease;
     position: relative;
     overflow: hidden;
-    box-shadow: 0px 4px 15px rgba(0, 136, 204, 0.5); /* Shadow for depth */
+    box-shadow: 0 4px 15px rgba(0, 136, 204, 0.5); /* Shadow for depth */
     animation: pulse 2s infinite; /* Пульсирующая анимация */
-  }
-  
-  .continue-button::before, .back-button::before {
+}
+
+.continue-button::before, .back-button::before {
     content: '';
     position: absolute;
     top: 0;
@@ -112,48 +111,48 @@
     background: rgba(255, 255, 255, 0.3);
     transform: skewX(-20deg);
     transition: 0.5s;
-  }
-  
-  .continue-button:hover::before, .back-button:hover::before {
+}
+
+.continue-button:hover::before, .back-button:hover::before {
     left: 100%;
-  }
-  
-  .continue-button:hover, .back-button:hover {
+}
+
+.continue-button:hover, .back-button:hover {
     background-image: linear-gradient(45deg, #00aaff, #0088cc); /* Change direction on hover */
-    box-shadow: 0px 6px 20px rgba(0, 136, 204, 0.7); /* Интенсивность тени при наведении */
-  }
-  
-  .continue-button:active, .back-button:active {
+    box-shadow: 0 6px 20px rgba(0, 136, 204, 0.7); /* Интенсивность тени при наведении */
+}
+
+.continue-button:active, .back-button:active {
     transform: scale(0.98); /* Эффект нажатия - кнопка слегка уменьшается */
-  }
-  
-  /* Пульсирующая анимация */
-  @keyframes pulse {
+}
+
+/* Пульсирующая анимация */
+@keyframes pulse {
     0% {
-      transform: scale(1);
-      box-shadow: 0px 4px 15px rgba(0, 136, 204, 0.5);
+        transform: scale(1);
+        box-shadow: 0 4px 15px rgba(0, 136, 204, 0.5);
     }
     50% {
-      transform: scale(1.05); /* Немного увеличивается */
-      box-shadow: 0px 6px 20px rgba(0, 136, 204, 0.7); /* Тень становится сильнее */
+        transform: scale(1.05); /* Немного увеличивается */
+        box-shadow: 0 6px 20px rgba(0, 136, 204, 0.7); /* Тень становится сильнее */
     }
     100% {
-      transform: scale(1);
-      box-shadow: 0px 4px 15px rgba(0, 136, 204, 0.5);
+        transform: scale(1);
+        box-shadow: 0 4px 15px rgba(0, 136, 204, 0.5);
     }
-  }
-  
-  /* Контейнер для второй страницы */
- 
-  
-  .second-page-title {
+}
+
+/* Контейнер для второй страницы */
+
+
+.second-page-title {
     font-size: 2rem;
     color: #fff;
     margin-bottom: 30px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
-  }
-  
-  .emoji-button {
+}
+
+.emoji-button {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -163,127 +162,137 @@
     padding: 15px;
     border-radius: 12px;
     background: linear-gradient(145deg, #232A33, #0d1117); /* Градиент для фона кнопки */
-  }
-  
-  .emoji-button:hover {
+}
+
+.emoji-button:hover {
     transform: scale(1.1); /* Эффект увеличения при наведении */
-    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2); /* Тень при наведении */
-  }
-  
-  .emoji-image {
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); /* Тень при наведении */
+}
+
+.emoji-image {
     width: 120px; /* Размер эмодзи */
     height: auto;
     transition: transform 0.3s ease;
-  }
-  
-  .emoji-button:hover .emoji-image {
+}
+
+.emoji-button:hover .emoji-image {
     transform: rotate(10deg); /* Легкое вращение эмодзи при наведении */
-  }
-  
-  .emoji-label {
+}
+
+.emoji-label {
     font-size: 1.2rem;
     color: #fff;
     margin-top: 10px;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Добавление небольшой тени к тексту */
-  }
-  
-  .choose-destiny {
+}
+
+.choose-destiny {
     font-size: 12rem;
     color: #ccc;
     margin-top: 40px;
-    font-style: bold;
+    font-family: 'Montserrat', bold, serif;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-  }
-  .choose-destiny {
+}
+
+.choose-destiny {
     margin-top: 10vh; /* Adjusted with vh */
-  }
-  
-  /* Анимации */
-  .emoji-button {
+}
+
+/* Анимации */
+.emoji-button {
     animation: fadeInUp 0.8s ease-out;
-  }
-  
-  @keyframes fadeInUp {
+}
+
+@keyframes fadeInUp {
     from {
-      opacity: 0;
-      transform: translateY(20px);
+        opacity: 0;
+        transform: translateY(20px);
     }
     to {
-      opacity: 1;
-      transform: translateY(0);
+        opacity: 1;
+        transform: translateY(0);
     }
-  }
-  .selected {
+}
+
+.selected {
     background-color: rgba(76, 175, 80, 0.2); /* Зеленый фон для выделенной кнопки */
     border: 2px solid #4CAF50; /* Зеленая рамка для выделенной кнопки */
-  }
-  .continue-button:hover {
+}
+
+.continue-button:hover {
     background-color: #45a049; /* Темно-зеленый фон при наведении */
-  }
-  .choose-destiny {
+}
+
+.choose-destiny {
     font-size: 1.1rem; /* Размер шрифта для текста */
     color: #ccc; /* Цвет текста */
     margin-top: 10px; /* Отступ сверху */
     text-align: center; /* Центрирование текста */
-  }
-  .continue-container {
+}
+
+.continue-container {
     display: flex;
     justify-content: center; /* Центрирование кнопки */
     margin-top: 20px; /* Отступ сверху */
-  }
-  /* Основные стили для страницы Talent */
+}
+
+/* Основные стили для страницы Talent */
 .talent-container {
     text-align: center;
-    
+
     padding: 20px;
     color: #fff;
-  }
-  .Sigma-Skibidi{
+}
+
+.Sigma-Skibidi {
     position: relative;
     top: -1000px;
-  }
-  .talent-title {
+}
+
+.talent-title {
     font-size: 1.8rem; /* Размер заголовка */
     margin-bottom: 10px;
-  }
-  
-  .talent-subtitle {
+}
+
+.talent-subtitle {
     font-size: 1rem; /* Размер подзаголовка */
     color: #ccc;
     margin-bottom: 20px;
-  }
-  
-  .talent-image {
+}
+
+.talent-image {
     margin: 20px 0;
-  }
-  .talent-image img{
-    width:200px;
+}
+
+.talent-image img {
+    width: 200px;
     height: auto;
 
-  }
-  .next-steps-title {
+}
+
+.next-steps-title {
     font-size: 1.2rem;
     margin-bottom: 10px;
-  }
-  
-  .next-steps-list {
+}
+
+.next-steps-list {
     list-style-type: none;
     padding: 0;
     color: #ccc;
-  }
-  
-  .next-steps-list li {
+}
+
+.next-steps-list li {
     margin-bottom: 10px;
-  }
-  
-  /* Кнопка для создания профиля */
-  .create-profile-container {
+}
+
+/* Кнопка для создания профиля */
+.create-profile-container {
     display: flex;
     justify-content: center;
     margin-top: 20px;
-  }
-  
-  .create-profile-button {
+}
+
+.create-profile-button {
     padding: 12px 24px;
     font-size: 1.2rem;
     color: white;
@@ -292,8 +301,8 @@
     border-radius: 12px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-  }
-  
-  /* Эффект при наведении на кнопку */
+}
+
+/* Эффект при наведении на кнопку */
   
   
