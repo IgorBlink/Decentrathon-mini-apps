@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './Welcome.css'; // CSS для стилей
 import Guy from'../../Assets/LaptopGuy.gif';
 import Choose from './Сhoose'; // Импортируем компонент Choose
-
+import { useTelegram } from '../../TelegramContext'; // Импортируйте хук
 const Welcome = () => {
   const [showChoosePage, setShowChoosePage] = useState(false); // Состояние для переключения страниц
 
