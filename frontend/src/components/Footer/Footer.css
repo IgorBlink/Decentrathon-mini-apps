@@ -1,0 +1,25 @@
+.footer {
+  position: absolute;
+  bottom: 20px; /* Чуть выше низа экрана */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%; /* 80% ширины экрана */
+  height: 60px;
+  background: linear-gradient(135deg, #4A90E2, #74b9ff); /* Новый потрясающий градиент */
+  border-radius: 20px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  padding: 0 10px;
+}
+
+.footer-icon {
+  flex: 1; /* Каждый элемент занимает равное пространство */
+  text-align: center; /* Центрирование содержимого */
+}
+.footer-icon img {
+  width: 30px;
+  height: 30px;
+  position: relative;
+}

@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './ResumeScroll.css'; // Импортируем стили для этого компонента
 import Image from '../../Assets/image.png'; // Убедитесь, что путь к изображению правильный
-
+import Footer from '../Footer/Footer';
 const ResumeScroll = () => {
   const resumes = [
     { name: 'Резюме 1', description: 'Описание резюме 1' },
@@ -76,7 +76,7 @@ const ResumeScroll = () => {
   };
 
   const handleTouchEnd = () => {
-    const threshold = 10; 
+    const threshold = 10;
 
     if (Math.abs(swipeOffset) > threshold) {
       const direction = swipeOffset < 0 ? 'left' : 'right';
@@ -94,48 +94,53 @@ const ResumeScroll = () => {
   };
 
   return (
-    <div
-      className="resume-container"
-      onTouchStart={handleTouchStart}
-      onTouchMove={handleTouchMove}
-      onTouchEnd={handleTouchEnd}
-      ref={containerRef}
-    >
-      {resumes.length > 0 && (
-        <div
-          ref={cardRef}
-          className={`resume-card ${cardClass}`}
-          style={getCardStyle()}
-        >
-          <img
-            src={Image}
-            alt="Avatar"
-            className="avatar"
-          />
-          <h2>{resumes[currentIndex].name}</h2>
-          <p>{resumes[currentIndex].description}</p>
-          <div className="skills-container">
-            {['Python', 'JavaScript', 'Java', 'C++', 'React'].map((skill, index) => (
-              <span key={index} className="skill">{skill}</span>
-            ))}
+    <div className="resume-page">
+      <div
+        className="resume-container"
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+        ref={containerRef}
+      >
+        {resumes.length > 0 && (
+          <div
+            ref={cardRef}
+            className={`resume-card ${cardClass}`}
+            style={getCardStyle()}
+          >
+            <img
+              src={Image}
+              alt="Avatar"
+              className="avatar"
+            />
+            <h2>{resumes[currentIndex].name}</h2>
+            <p>{resumes[currentIndex].description}</p>
+            <div className="skills-container">
+              {['Python', 'JavaScript', 'Java', 'C++', 'React'].map((skill, index) => (
+                <span key={index} className="skill">{skill}</span>
+              ))}
+            </div>
           </div>
-        </div>
-      )}
-      {isSwiping && (
-        <div className={`swipe-indicator ${swipeOffset < 0 ? 'left' : 'right'}`}>
-          {swipeOffset < 0 ? '👎' : '👍'}
-        </div>
-      )}
-      {hintVisible && (
-        <div className="hint-overlay">
-          <div className="hint-content">
-            <div className="arrow left">←</div>
-            <div className="hint-text">Swipe left for Skip</div>
-            <div className="arrow right">→</div>
-            <div className="hint-text">Swipe right for Blink</div>
+        )}
+        {isSwiping && (
+          <div className={`swipe-indicator ${swipeOffset < 0 ? 'left' : 'right'}`}>
+            {swipeOffset < 0 ? '👎' : '👍'}
           </div>
-        </div>
-      )}
+        )}
+        {hintVisible && (
+          <div className="hint-overlay">
+            <div className="hint-content">
+              <div className="arrow left">←</div>
+              <div className="hint-text">Swipe left for Skip</div>
+              <div className="arrow right">→</div>
+              <div className="hint-text">Swipe right for Blink</div>
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Интеграция футера */}
+      <Footer /> {/* Здесь добавляем футер */}
     </div>
   );
 };
