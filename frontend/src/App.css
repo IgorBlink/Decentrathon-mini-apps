@@ -10,7 +10,7 @@
 }
 body{
   background-color: #101820;
-}
-body {
   font-family: 'Montserrat', bold;
+  overflow: hidden;
 }
+

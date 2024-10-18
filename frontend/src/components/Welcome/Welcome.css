@@ -146,15 +146,7 @@
   }
   
   /* Контейнер для второй страницы */
-  emoji-container {
-    text-align: center;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
+ 
   
   .second-page-title {
     font-size: 2rem;
@@ -238,4 +230,69 @@
     justify-content: center; /* Центрирование кнопки */
     margin-top: 20px; /* Отступ сверху */
   }
+  /* Основные стили для страницы Talent */
+.talent-container {
+    text-align: center;
+    
+    padding: 20px;
+    color: #fff;
+  }
+  .Sigma-Skibidi{
+    position: relative;
+    top: -1000px;
+  }
+  .talent-title {
+    font-size: 1.8rem; /* Размер заголовка */
+    margin-bottom: 10px;
+  }
+  
+  .talent-subtitle {
+    font-size: 1rem; /* Размер подзаголовка */
+    color: #ccc;
+    margin-bottom: 20px;
+  }
+  
+  .talent-image {
+    margin: 20px 0;
+  }
+  .talent-image img{
+    width:200px;
+    height: auto;
+
+  }
+  .next-steps-title {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+  
+  .next-steps-list {
+    list-style-type: none;
+    padding: 0;
+    color: #ccc;
+  }
+  
+  .next-steps-list li {
+    margin-bottom: 10px;
+  }
+  
+  /* Кнопка для создания профиля */
+  .create-profile-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .create-profile-button {
+    padding: 12px 24px;
+    font-size: 1.2rem;
+    color: white;
+    background-color: #0088cc; /* Синий цвет, как у Telegram */
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  /* Эффект при наведении на кнопку */
+  
   

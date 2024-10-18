@@ -4,9 +4,12 @@ import sunglassesEmoji from '../../Assets/money-face.gif'; // Изображен
 import smilingEmoji from '../../Assets/LaptopGuy.gif';
 import { useTelegram } from '../../TelegramContext'; // Импортируйте хук для получения Telegram ID
 import axios from 'axios'; // Импортируйте axios (если используете его)
+import Employer from './Employer'; // Компонент Employer
+import Talent from './Talent'; // Компонент Talent
 
 const Choose = () => {
   const [selected, setSelected] = useState(null); // Состояние для отслеживания выбранной кнопки
+  const [showNext, setShowNext] = useState(false); // Состояние для отображения следующего компонента
   const userId = useTelegram(); // Получаем Telegram ID из контекста
 
   const handleEmployerClick = () => { 
@@ -20,6 +23,8 @@ const Choose = () => {
   };
 
   const handleContinue = async () => {
+    setShowNext(true); // Переходим на следующий слайд независимо от результата запроса
+
     if (userId) {
       try {
         const response = await axios.post('https://d330-2a0d-b201-d002-1ac5-f079-4961-158e-887d.ngrok-free.app/api/users/login', {
@@ -27,7 +32,6 @@ const Choose = () => {
           userType: selected, // Добавляем информацию о выбранном типе
         });
         console.log('ID успешно отправлен:', response.data);
-        // Здесь вы можете обработать ответ, например, перенаправить пользователя или показать сообщение
       } catch (error) {
         console.error('Ошибка при отправке ID:', error);
       }
@@ -35,6 +39,15 @@ const Choose = () => {
       console.error('Telegram ID не найден');
     }
   };
+
+  // Рендерим либо экран выбора, либо следующий слайд в зависимости от состояния
+  if (showNext) {
+    if (selected === 'employer') {
+      return <Employer />;
+    } else if (selected === 'talent') {
+      return <Talent />;
+    }
+  }
 
   return (
     <div className="mobile-container">
