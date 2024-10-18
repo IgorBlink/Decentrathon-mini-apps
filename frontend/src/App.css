@@ -1,5 +1,16 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+.mobile-container {
+  width: 100vw;
+  height: 100vh;
+  max-width: 400px; /* Typical width for mobile devices */
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #101820; /* Background color for the page */
+}
+body{
+  background-color: #101820;
+}
+body {
+  font-family: 'Montserrat', bold;
 }
