@@ -27,7 +27,7 @@ const Choose = () => {
 
     if (userId) {
       try {
-        const response = await axios.post('https://d330-2a0d-b201-d002-1ac5-f079-4961-158e-887d.ngrok-free.app/api/users/login', {
+        const response = await axios.post('https://3c52-62-122-3-219.ngrok-free.app/api/users/login', {
           telegramId: userId,
           userType: selected, // Добавляем информацию о выбранном типе
         });
