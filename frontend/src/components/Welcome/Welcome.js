@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './Welcome.css'; // CSS для стилей
 import Guy from '../../Assets/LaptopGuy.gif';
-import Choose from './Сhoose'; // Импортируем компонент Choose
+import Choose from './Choose'; // Импортируем компонент Choose
 import { useTelegram } from '../../TelegramContext'; // Импортируйте хук
 import { useNavigate } from 'react-router-dom'; // Импортируем хук для навигации
 
