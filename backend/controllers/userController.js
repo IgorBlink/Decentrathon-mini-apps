@@ -33,7 +33,7 @@ exports.login = async (req,res) => {
 
 exports.register = async (req, res) => {
     try {
-        const { telegramID, userType, skills, grades } = req.body;
+        const { telegramID, userType, skills, grades, title, content } = req.body;
 
         const user = await User.findOne({_id: telegramID});
 
@@ -64,6 +64,9 @@ exports.register = async (req, res) => {
         });
 
         const newVacancy = new Vacancy({
+            title: title,
+            content: content,
+            photo: photo,
             skills: skills,
             grades: grades,
             userId: telegramID

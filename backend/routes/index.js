@@ -5,6 +5,6 @@ const userRouter = require('./userRouter');
 const vacancyRouter = require('./vacancyRouter');
 
 router.use('/users', userRouter);
-router.use('/vanancy', vacancyRouter);
+router.use('/vacancy', vacancyRouter);
 
 module.exports = router;

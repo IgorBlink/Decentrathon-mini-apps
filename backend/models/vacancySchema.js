@@ -1,6 +1,18 @@
 const mongoose = require('mongoose');
 
 const vacancySchema = new mongoose.Schema({
+    title: {
+        type: String,
+        required: true
+    },
+    content: {
+        type: String,
+        required: true
+    },
+    photo: {
+        type: String,
+        default: ''
+    },
     skills: {
         type: [String],
         default: []
