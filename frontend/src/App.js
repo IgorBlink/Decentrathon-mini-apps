@@ -10,7 +10,7 @@ function App() {
         <TelegramProvider>
             <Routes>
                 <Route path="/" element={<Welcome />} />
-                <Route path="/resumes" element={<ResumeScroll />} />
+                <Route path="/swipes" element={<ResumeScroll />} />
             </Routes>
         </TelegramProvider>
     );

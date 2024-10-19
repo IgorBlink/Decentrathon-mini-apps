@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import './ResumeScroll.css'; // Импортируем стили для этого компонента
 import Image from '../../Assets/image.png'; // Убедитесь, что путь к изображению правильный
 import Footer from '../Footer/Footer';
+
 const ResumeScroll = () => {
   const resumes = [
     { name: 'Резюме 1', description: 'Описание резюме 1' },
@@ -57,7 +58,7 @@ const ResumeScroll = () => {
   };
 
   const handleTouchStart = (e) => {
-    setTouchStart(e.touches[0].clientX);
+    setTouchStart(e.touches ? e.touches[0].clientX : e.clientX); // Определяем, касание или мышь
     setIsSwiping(true);
     clearTimeout(resetTimeout);
     clearTimeout(hintTimeoutRef.current); // Очищаем таймер подсказки при взаимодействии
@@ -65,7 +66,7 @@ const ResumeScroll = () => {
   };
 
   const handleTouchMove = (e) => {
-    const touchEnd = e.touches[0].clientX;
+    const touchEnd = e.touches ? e.touches[0].clientX : e.clientX; // Определяем, касание или мышь
     const distance = touchEnd - touchStart;
 
     const containerWidth = containerRef.current.offsetWidth;
@@ -86,6 +87,21 @@ const ResumeScroll = () => {
     }
   };
 
+  // Обработчики для ПК
+  const handleMouseDown = (e) => {
+    handleTouchStart(e); // Используем ту же логику для начала свайпа
+  };
+
+  const handleMouseMove = (e) => {
+    if (isSwiping) {
+      handleTouchMove(e); // Используем ту же логику для движения свайпа
+    }
+  };
+
+  const handleMouseUp = () => {
+    handleTouchEnd(); // Используем ту же логику для завершения свайпа
+  };
+
   const getCardStyle = () => {
     return {
       transform: `translateX(${swipeOffset}px) rotateZ(${(swipeOffset / 15).toFixed(1)}deg)`,
@@ -100,6 +116,9 @@ const ResumeScroll = () => {
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
+        onMouseDown={handleMouseDown} // Добавлено для ПК
+        onMouseMove={handleMouseMove} // Добавлено для ПК
+        onMouseUp={handleMouseUp} // Добавлено для ПК
         ref={containerRef}
       >
         {resumes.length > 0 && (
