@@ -1,11 +1,11 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
+import ReactDOM from 'react-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import App from './App';
-import { TelegramProvider } from './TelegramContext'; // Import your Telegram context provider
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-    <TelegramProvider>
+ReactDOM.render(
+    <Router>
         <App />
-    </TelegramProvider>
+    </Router>,
+    document.getElementById('root')
 );

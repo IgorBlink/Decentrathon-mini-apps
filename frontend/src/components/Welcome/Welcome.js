@@ -1,43 +1,65 @@
-// Welcome.js
 import React, { useEffect, useState } from 'react';
-import './Welcome.css';
+import './Welcome.css'; // CSS для стилей
 import Guy from '../../Assets/LaptopGuy.gif';
 import Choose from './Сhoose'; // Импортируем компонент Choose
-import { useTelegram } from '../../TelegramContext'; // Импортируем хук
+import { useTelegram } from '../../TelegramContext'; // Импортируйте хук
+import { useNavigate } from 'react-router-dom'; // Импортируем хук для навигации
 
 const Welcome = () => {
-    const userId = useTelegram(); // Получаем ID пользователя из контекста
-    const [userExists, setUserExists] = useState(null); // Состояние для проверки существования пользователя
+    const { tg } = useTelegram(); // Получаем Telegram API
     const [showChoosePage, setShowChoosePage] = useState(false); // Состояние для переключения страниц
+    const [loading, setLoading] = useState(true); // Состояние загрузки
+    const navigate = useNavigate(); // Для навигации
 
-    // Проверяем существование пользователя при загрузке компонента
     useEffect(() => {
-        const checkUserExistence = async () => {
-            if (userId) {
-                const response = await fetch('https://942d-2a03-32c0-7000-7c7f-5438-a3a3-6420-61eb.ngrok-free.app/api/users/login', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ telegramId: userId }),
-                });
+        // Проверяем наличие tg
+        if (!tg) {
+            console.error('Telegram API не инициализирован');
+            return;
+        }
 
-                const data = await response.json();
-                setUserExists(data.exists); // Предполагаем, что ответ содержит поле 'exists'
-            }
-        };
+        // Получаем Telegram ID
+        const telegramID = tg.initDataUnsafe.user.id; // Предположим, ID находится здесь
 
-        checkUserExistence();
-    }, [userId]);
+        console.log('Telegram ID:', telegramID); // Логируем Telegram ID
 
-    // Если пользователя нет, показываем Choose компонент
-    if (userExists === false) {
-        return <Choose />;
+        // Отправляем запрос на сервер для проверки пользователя
+        fetch('https://942d-2a03-32c0-7000-7c7f-5438-a3a3-6420-61eb.ngrok-free.app/api/users/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ telegramID }), // Отправляем Telegram ID
+        })
+            .then((response) => {
+                if (response.ok) {
+                    // Если пользователь существует, перенаправляем на страницу резюме
+                    navigate('/resumes');
+                } else if (response.status === 404) {
+                    // Если пользователь не существует, показываем Welcome Page
+                    console.log('Пользователь не найден, показываем Welcome Page');
+                    setLoading(false); // Меняем состояние загрузки
+                } else {
+                    // Обработка других возможных статусов
+                    console.error('Ошибка при проверке пользователя', response.status);
+                }
+            })
+            .catch((error) => {
+                console.error('Ошибка сети:', error);
+            });
+    }, [tg, navigate]);
+
+    // Отображаем загрузку, пока идет проверка
+    if (loading) {
+        return <div>Загрузка...</div>;
     }
 
-    // Если мы еще не получили ответ о существовании пользователя
-    if (userExists === null) {
-        return <div>Loading...</div>; // Индикатор загрузки
+    const handleContinueClick = () => {
+        setShowChoosePage(true); // Переход на вторую страницу
+    };
+
+    if (showChoosePage) {
+        return <Choose />; // Рендерим компонент Choose при переходе на вторую страницу
     }
 
     return (
@@ -50,7 +72,7 @@ const Welcome = () => {
                 <div className="welcome-text">
                     <p>We believe in developing talent and are committed to helping each employee realize their potential.</p>
                 </div>
-                <button className="continue-button" onClick={() => setShowChoosePage(true)}>Continue</button>
+                <button className="continue-button" onClick={handleContinueClick}>Continue</button>
             </div>
         </div>
     );

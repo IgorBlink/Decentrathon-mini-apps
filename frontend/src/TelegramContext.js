@@ -1,37 +1,24 @@
-import React, {createContext, useContext, useEffect, useState} from 'react';
+import { createContext, useContext } from 'react';
 
-// Создание контекста
-const TelegramContext = createContext();
+// Создаем контекст
+const TelegramContext = createContext(null);
 
-// Провайдер контекста
-export const TelegramProvider = ({children}) => {
-    const [userId, setUserId] = useState(null);
+// Провайдер для контекста
+export const TelegramProvider = ({ children }) => {
+    const tg = window?.Telegram?.WebApp;
 
-    useEffect(() => {
-        if (window.Telegram) {
-            const user = window.Telegram.WebApp.initDataUnsafe.user;
-
-            if (user && user.id) {
-                setUserId(user.id);
-                console.log('User ID:', user.id);
-            } else {
-                console.error('User ID не найден');
-            }
-
-            window.Telegram.WebApp.ready();
-        } else {
-            console.error('Telegram Web Apps API не доступен');
-        }
-    }, []);
+    if (!tg) {
+        console.warn('Telegram WebApp не инициализирован');
+    }
 
     return (
-        <TelegramContext.Provider value={userId}>
+        <TelegramContext.Provider value={{ tg }}>
             {children}
         </TelegramContext.Provider>
     );
 };
 
-// Хук для использования контекста
+// Хук для доступа к Telegram контексту
 export const useTelegram = () => {
     return useContext(TelegramContext);
 };

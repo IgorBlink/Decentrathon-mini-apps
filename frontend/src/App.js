@@ -1,21 +1,17 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Welcome from './components/Welcome/Welcome'; // Предполагается, что файл в той же директории
-import ResumeScroll from './components/ResumeScroll/ResumeScroll'; // Импорт нового компонента
-import './App.css';
+import { Route, Routes } from 'react-router-dom'; // Убедись, что Router не импортируется здесь
+import Welcome from './components/Welcome/Welcome';
+import ResumeScroll from './components/ResumeScroll/ResumeScroll';
 import { TelegramProvider } from './TelegramContext';
+import './App.css';
 
 function App() {
     return (
         <TelegramProvider>
-            <Router>
-                <div className="app">
-                    <Routes>
-                        <Route path="/" element={<Welcome />} />
-                        <Route path="/resumes" element={<ResumeScroll />} />
-                    </Routes>
-                </div>
-            </Router>
+            <Routes>
+                <Route path="/" element={<Welcome />} />
+                <Route path="/resumes" element={<ResumeScroll />} />
+            </Routes>
         </TelegramProvider>
     );
 }
