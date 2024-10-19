@@ -32,11 +32,11 @@ const TalentPage = () => {
                     </ul>
                 </div>
 
-                <div className="continue-container">
+               
                     <button className="continue-button">
                         Explore opportunities
                     </button>
-                </div>
+               
             </div>
         </div>
     );

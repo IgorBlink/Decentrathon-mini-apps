@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Welcome.css'; // CSS для стилей
 import smilingEmoji from '../../Assets/LaptopGuy.gif'; // Изображение эмодзи
-
+import ConnectTon from './ConnectTon'
+import SkillsPage from './SkillsPage'
 const TalentPage = () => {
+    const [showChoosePage, setShowChoosePage] = useState(false); 
     const handleCreateProfileClick = () => {
-        console.log("Create Profile button clicked");
-        // Логика для создания профиля
+        setShowChoosePage(true);
     };
-
+    if (showChoosePage) {
+        return <SkillsPage />; // Рендерим компонент Choose при переходе на вторую страницу
+    }
     return (
         <div className="mobile-container">
             <div className="talent-container">
@@ -32,7 +35,7 @@ const TalentPage = () => {
                 </div>
 
                 <div className="continue-container">
-                    <button className="continue-button">
+                    <button className="continue-button" onClick={handleCreateProfileClick}>
                         Show your talent
                     </button>
                 </div>

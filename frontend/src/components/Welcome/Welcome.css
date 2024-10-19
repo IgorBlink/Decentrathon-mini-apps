@@ -2,17 +2,17 @@
 
 
 .welcome-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     text-align: center;
     background-color: #101820;
     padding: 20px;
     border-radius: 12px;
     color: #fff;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
     width: 100%;
-    height: 100vh; /* Full viewport height */
+    height: 100vh;
 }
 
 .welcome-title {
@@ -99,6 +99,7 @@
     overflow: hidden;
     box-shadow: 0 4px 15px rgba(0, 136, 204, 0.5); /* Shadow for depth */
     animation: pulse 2s infinite; /* Пульсирующая анимация */
+    
 }
 
 .continue-button::before, .back-button::before {
@@ -302,6 +303,337 @@
     transition: background-color 0.3s ease;
 }
 
-/* Эффект при наведении на кнопку */
+/* Adjust base styles for better adaptability to small screens */
+.welcome-container {
+    text-align: center;
+    background-color: #101820;
+    padding: 15px; /* Reduced padding for smaller screens */
+    border-radius: 12px;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    overflow-y: auto; /* Allow vertical scrolling for very small screens */
+}
+
+.welcome-title {
+    font-size: 2rem; /* Adjusted font size */
+    margin-bottom: 15px;
+    top: -8vh; /* Less top offset for smaller screens */
+}
+
+.welcome-image img {
+    width: 150px; /* Smaller image size */
+    height: auto;
+    top: -4vh;
+}
+
+.welcome-text {
+    font-size: 1rem; /* Reduced text size */
+    margin-top: 15px;
+    max-width: 280px; /* Slightly smaller text box */
+}
+
+/* Adjusting button size for smaller screens */
+.continue-button, .back-button {
+    padding: 12px 25px; /* Smaller padding */
+    width: 70%;
+    font-size: 1rem; /* Slightly smaller font */
+}
+
+.emoji-button {
+    padding: 10px; /* Smaller padding */
+}
+
+.emoji-image {
+    width: 100px; /* Smaller emoji size */
+}
+
+/* Media query for screens with smaller height */
+@media screen and (max-height: 600px) {
+    .welcome-title {
+        font-size: 1.8rem; /* Further reduction in font size */
+        top: -6vh;
+    }
+
+    .welcome-image img {
+        width: 120px; /* Further reduce image size */
+    }
+
+    .welcome-text {
+        font-size: 0.9rem; /* Smaller text */
+        margin-top: 10px;
+    }
+
+    .continue-button, .back-button {
+        padding: 10px 20px; /* Even smaller padding */
+        width: 65%;
+        font-size: 0.9rem;
+    }
+
+    .emoji-button {
+        padding: 8px; /* Reduced padding */
+    }
+
+    .emoji-image {
+        width: 80px; /* Even smaller emoji */
+    }
+}
+@media screen and (max-height: 640px) {
+    .talent-title {
+        font-size: 1.5rem; /* Reduce title size */
+    }
+
+    .talent-subtitle {
+        font-size: 0.9rem; /* Reduce subtitle size */
+    }
+
+    .talent-image img {
+        width: 120px; /* Smaller image for better fit */
+    }
+
+    .next-steps-title {
+        font-size: 1rem; /* Reduce step title size */
+    }
+
+    .next-steps-list li {
+        font-size: 0.9rem; /* Smaller list item text */
+    }
+
+    .continue-button {
+        padding: 10px 20px;
+        font-size: 1rem;
+        width: 70%; /* Slightly reduce button width */
+    }
+}   
+/* Starry background */
+.starry-sky {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: black;
+    z-index: -1; /* Puts the stars behind all content */
+    overflow: hidden;
+}
+
+/* Create many stars with CSS and animate them */
+.stars {
+    position: relative;
+    width: 1px;
+    height: 1px;
+    background: transparent;
+    box-shadow:
+        100px 200px white, 150px 300px white, 200px 500px white, 250px 100px white, 
+        300px 400px white, 350px 600px white, 400px 700px white, 450px 200px white, 
+        500px 500px white, 550px 300px white, 600px 400px white, 650px 200px white,
+        700px 500px white, 750px 300px white, 800px 100px white, 850px 600px white, 
+        900px 500px white, 950px 400px white, 1000px 200px white, 1050px 300px white;
+    animation: twinkling 1.5s infinite alternate;
+}
+
+/* Animation for the twinkling effect */
+@keyframes twinkling {
+    0% {
+        transform: scale(1);
+        opacity: 0.5;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 0.5;
+    }
+}
+
+/* Container styles to ensure content is on top */
+.mobile-container {
+    position: relative;
+    z-index: 1; /* Keeps content above the background */
+}
+.talents-skills-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 20px;
+    max-height: 300px; /* Задаем максимальную высоту контейнера */
+    overflow-y: auto; /* Включаем вертикальную прокрутку */
+    scrollbar-width: thin; /* Для Firefox */
+    scrollbar-color: #4A90E2 #f0f0f0; /* Цвет полосы прокрутки */
+}
+
+/* Стили для скроллбара */
+.talents-skills-container::-webkit-scrollbar {
+    width: 8px; /* Ширина полосы прокрутки */
+}
+
+.talents-skills-container::-webkit-scrollbar-track {
+    background: #f0f0f0; /* Цвет фона полосы прокрутки */
+}
+
+.talents-skills-container::-webkit-scrollbar-thumb {
+    background-color: #4A90E2; /* Цвет ползунка */
+    border-radius: 10px; /* Скругляем углы ползунка */
+}
+
+/* Отдельные блоки для скиллов */
+.talents-skill {
+    background: linear-gradient(135deg, #4A90E2, #74b9ff);
+    color: #fff;
+    border-radius: 15px;
+    padding: 10px 15px;
+    margin: 10px;
+    font-size: 14px;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    cursor: pointer; /* Указатель на курсор при наведении */
+}
+
+.talents-skill.selected {
+    background: linear-gradient(135deg, #50e3c2, #7ed321); /* Изменение цвета для выбранного навыка */
+}
+
+.talents-skill:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 15px rgba(74, 144, 226, 0.5);
+}
+
+/* Тайтл страницы */
+.talents-title {
+    font-size: 2rem;
+    color: #fff;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Субтайтл */
+.subtitle {
+    text-align: center;
+    margin-bottom: 10px;
+    color: #555; /* Цвет для субтайтла */
+}
+
+/* Контейнер для пользовательского скилла */
+/* Стили для кастомного скилла */
+.talents-skills-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.talents-skill {
+    background: linear-gradient(135deg, #4A90E2, #74b9ff);
+    color: #fff;
+    border-radius: 15px;
+    padding: 10px 15px;
+    margin: 10px;
+    font-size: 14px;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+.talents-skill.selected {
+    background: linear-gradient(135deg, #50e3c2, #7ed321);
+}
+
+.talents-skill:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 15px rgba(74, 144, 226, 0.5);
+}
+
+.custom-skill-container {
+    margin-top: 20px;
+    position: relative; /* Для правильного позиционирования выпадающего списка */
+}
+
+.custom-skill-input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    transition: border 0.3s ease;
+}
+.input-container {
+    display: flex; /* Enable flexbox */
+    justify-content: center; /* Center input field horizontally */
+    width: 100%; /* Full width to ensure proper alignment */
+    margin-top: 20px; /* Add margin to adjust position */
+}
+
+/* Input field styles */
+.input-field {
+    width: 80%; /* Adjust width as needed */
+    padding: 10px; /* Add some padding */
+    border: 1px solid #ccc; /* Add border */
+    border-radius: 6px; /* Rounded corners */
+    font-size: 1rem; /* Font size */
+}
+
+/* Dropdown menu styles */
+.dropdown-list {
+    position: absolute; /* Use absolute positioning */
+    top: calc(100% + 10px); /* Position below input */
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Adjust for centering */
+    background-color: #fff; /* Background color */
+    border: 1px solid #ccc; /* Border */
+    border-radius: 6px; /* Rounded corners */
+    z-index: 10; /* Ensure it's above other elements */
+    display: none; /* Hidden by default */
+}
+
+/* Show dropdown when input is focused */
+.input-field:focus + .dropdown-list {
+    display: block; /* Show dropdown on focus */
+}
+.custom-skill-input:focus {
+    border-color: #4A90E2; /* Изменение цвета при фокусе */
+    outline: none;
+}
+
+.suggestions-list {
+    position: absolute;
+    top: 100%; /* Под полем ввода */
+    left: 0;
+    right: 0;
+    background: white;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    max-height: 200px; /* Ограничение высоты */
+    overflow-y: auto; /* Прокрутка при переполнении */
+    padding: 0;
+    margin: 0;
+    color:#101820;
+    list-style: none; /* Убираем маркеры */
+}
+
+.suggestion-item {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.suggestion-item:hover {
+    background: #f0f0f0; /* Цвет при наведении */
+}
+
+.continue-button {
+    margin-top: 20px;
+   
+}
+
+.continue-button:hover {
+    background-color: #357ABD; /* Темнее при наведении */
+}
+
+
+
   
   
