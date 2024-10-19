@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './Welcome.css'; // Используем стили отсюда
 import { useTelegram } from '../../TelegramContext'; // Импортируйте хук
 import End from './End'; // Импортируем компонент End
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
 const SkillsPage = () => {
     const { tg } = useTelegram(); // Получаем Telegram API
@@ -85,7 +86,7 @@ const SkillsPage = () => {
             console.log('Telegram ID:', telegramID); // Логируем Telegram ID
 
             // Отправка данных на бэкэнд
-            fetch('https://942d-2a03-32c0-7000-7c7f-5438-a3a3-6420-61eb.ngrok-free.app/api/users/register', {
+            fetch(`${backendUrl}/api/users/register`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
