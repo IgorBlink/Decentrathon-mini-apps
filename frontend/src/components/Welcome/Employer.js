@@ -1,12 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
+
 import './Welcome.css'; // CSS для стилей
 import money from '../../Assets/money-flying.gif'; // Изображение эмодзи
-
+import PositionsPage from './PositionPage';
 const TalentPage = () => {
-    const handleCreateProfileClick = () => {
-        console.log("Create Profile button clicked");
-        // Логика для создания профиля
+    const [showChoosePage, setShowChoosePage] = useState(false); 
+    const handleCreateClick = () => {
+        setShowChoosePage(true);
     };
+    if (showChoosePage) {
+        return <PositionsPage />; // Рендерим компонент Choose при переходе на вторую страницу
+    }
 
     return (
         <div className="mobile-container">
@@ -33,7 +37,7 @@ const TalentPage = () => {
                 </div>
 
                
-                    <button className="continue-button">
+                    <button className="continue-button" onClick={handleCreateClick}>
                         Explore opportunities
                     </button>
                

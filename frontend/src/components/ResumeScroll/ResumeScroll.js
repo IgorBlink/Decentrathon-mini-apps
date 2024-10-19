@@ -76,7 +76,7 @@ const ResumeScroll = () => {
   };
 
   const handleTouchEnd = () => {
-    const threshold = 10;
+    const threshold = 5;
 
     if (Math.abs(swipeOffset) > threshold) {
       const direction = swipeOffset < 0 ? 'left' : 'right';

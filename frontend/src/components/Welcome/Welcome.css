@@ -489,13 +489,17 @@
     border-radius: 15px;
     padding: 10px 15px;
     margin: 10px;
+    height:20px;
     font-size: 14px;
     transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
     cursor: pointer; /* Указатель на курсор при наведении */
 }
 
 .talents-skill.selected {
-    background: linear-gradient(135deg, #50e3c2, #7ed321); /* Изменение цвета для выбранного навыка */
+    background-color: #4caf50;
+    color: white;
+    border: 1px solid #4caf50;
+    transform: scale(1.05); /* Легкое увеличение при выборе */
 }
 
 .talents-skill:hover {
