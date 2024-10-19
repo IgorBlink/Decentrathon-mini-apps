@@ -19,3 +19,6 @@ body {
       
 }
 
+* {
+    user-select: none;
+  }

@@ -1,11 +1,11 @@
 .footer {
   position: absolute;
-  bottom: 20px; /* Чуть выше низа экрана */
+  bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
-  width: 80%; /* 80% ширины экрана */
+  width: 80%;
   height: 60px;
-  background: linear-gradient(135deg, #4A90E2, #74b9ff); /* Новый потрясающий градиент */
+  background: linear-gradient(135deg, #4A90E2, #74b9ff);
   border-radius: 20px;
   display: flex;
   justify-content: space-around;
@@ -15,11 +15,29 @@
 }
 
 .footer-icon {
-  flex: 1; /* Каждый элемент занимает равное пространство */
-  text-align: center; /* Центрирование содержимого */
-}
-.footer-icon img {
   width: 30px;
   height: 30px;
   position: relative;
+}
+
+.footer-button {
+  background: none;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.footer-button:active {
+  transform: scale(0.9); /* Эффект нажатия */
+}
+
+.footer-button:hover .footer-icon {
+  filter: brightness(0.8); /* Эффект затемнения при наведении */
+}
+
+.footer-button.active {
+  border: 2px solid #fff; /* Белая рамка для активной кнопки */
+  background-color: rgba(255, 255, 255, 0.2); /* Прозрачный фон */
+  border-radius: 50%; /* Закругляем активную кнопку */
 }

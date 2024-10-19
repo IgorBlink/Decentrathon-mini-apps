@@ -10,15 +10,15 @@ const Welcome = () => {
     const [showChoosePage, setShowChoosePage] = useState(false); // Состояние для переключения страниц
     const [loading, setLoading] = useState(true); // Состояние загрузки
     const navigate = useNavigate(); // Для навигации
-
+    const backendUrl = process.env.REACT_APP_BACKEND_URL;
     useEffect(() => {
         // Получаем Telegram ID, если приложение открыто в Telegram
-        const telegramID = tg?.initDataUnsafe?.user?.id || 11211872747; // Если нет реального ID, используем тестовый
+        const telegramID = tg?.initDataUnsafe?.user?.id || 803817300; // Если нет реального ID, используем тестовый
 
         console.log('Telegram ID:', telegramID); // Логируем Telegram ID
 
         // Отправляем запрос на сервер для проверки пользователя
-        fetch('https://942d-2a03-32c0-7000-7c7f-5438-a3a3-6420-61eb.ngrok-free.app/api/users/login', {
+        fetch(`${backendUrl}/api/users/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -28,7 +28,7 @@ const Welcome = () => {
         .then((response) => {
             if (response.ok) {
                 // Если пользователь существует, перенаправляем на страницу резюме
-                navigate('/resumes');
+                navigate('/swipes');
             } else if (response.status === 404) {
                 // Если пользователь не существует, показываем Welcome Page
                 console.log('Пользователь не найден, показываем Welcome Page');
