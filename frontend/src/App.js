@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom'; // Убедись, что Rout
 import Welcome from './components/Welcome/Welcome';
 import ResumeScroll from './components/ResumeScroll/ResumeScroll';
 import { TelegramProvider } from './TelegramContext';
+
 import './App.css';
 
 function App() {
@@ -11,6 +12,8 @@ function App() {
             <Routes>
                 <Route path="/" element={<Welcome />} />
                 <Route path="/swipes" element={<ResumeScroll />} />
+                
+
             </Routes>
         </TelegramProvider>
     );

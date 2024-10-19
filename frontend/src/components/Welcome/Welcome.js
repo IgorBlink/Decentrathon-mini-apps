@@ -4,7 +4,7 @@ import Guy from '../../Assets/LaptopGuy.gif';
 import Choose from './Choose'; // Импортируем компонент Choose
 import { useTelegram } from '../../TelegramContext'; // Импортируйте хук
 import { useNavigate } from 'react-router-dom'; // Импортируем хук для навигации
-
+import LoadingScreen from '../LoadingScreen/LoadingScreen'
 const Welcome = () => {
     const { tg } = useTelegram(); // Получаем Telegram API
     const [showChoosePage, setShowChoosePage] = useState(false); // Состояние для переключения страниц
@@ -45,7 +45,7 @@ const Welcome = () => {
 
     // Отображаем загрузку, пока идет проверка
     if (loading) {
-        return <div>Загрузка...</div>;
+         return <LoadingScreen />;
     }
 
     const handleContinueClick = () => {
@@ -53,7 +53,7 @@ const Welcome = () => {
     };
 
     if (showChoosePage) {
-        return <Choose />; // Рендерим компонент Choose при переходе на вторую страницу
+        return <Choose/>;// Рендерим компонент Choose при переходе на вторую страницу
     }
 
     return (

@@ -22,7 +22,7 @@ const End = () => {
     }
 
     const handleContinueClick = () => {
-        navigate('/resumes'); // Переход на следующую страницу
+        navigate('/swipes'); // Переход на следующую страницу
     };
 
     return (
