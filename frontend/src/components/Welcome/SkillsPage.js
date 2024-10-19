@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import './Welcome.css'; // Используем стили отсюда
+import { useTelegram } from '../../TelegramContext'; // Импортируйте хук
 
 const SkillsPage = () => {
+    const { tg } = useTelegram(); // Получаем Telegram API
     const initialSkills = [
         'JavaScript', 'Python', 'Java', 'C#', 'PHP', 'Ruby', 'Swift', 'C++', 'TypeScript', 'HTML', 
         'CSS', 'React', 'Angular', 'Vue.js', 'Node.js', 'Express', 'Django', 'Flask', 'Spring', 
@@ -10,7 +12,7 @@ const SkillsPage = () => {
         'Docker', 'Kubernetes', 'GraphQL', 'Next.js', 'Sass', 'Tailwind CSS', 'Bootstrap', 
         'jQuery', 'Redis', 'Elixir', 'Haskell', 'F#', 'Lua', 'MATLAB'
     ];
-    
+
     const [selectedSkills, setSelectedSkills] = useState([]);
     const [customSkills, setCustomSkills] = useState([]); // Для хранения кастомных скиллов
     const [customSkill, setCustomSkill] = useState('');
@@ -63,26 +65,32 @@ const SkillsPage = () => {
 
     // Функция для получения выбранных навыков в виде массива
     const handleContinue = () => {
+        const userType = "talent"; // Устанавливаем тип пользователя
         const skillsToSend = [...selectedSkills, ...customSkills]; // Объединяем выбранные и кастомные навыки
-        console.log(skillsToSend); // Здесь вы можете использовать skillsToSend для отправки на бэкэнд
-        
-        // Пример отправки на бэкэнд с использованием fetch
-        /*
-        fetch('YOUR_BACKEND_ENDPOINT', {
+        const telegramID = tg?.initData ? new URLSearchParams(tg.initData).get('user_id') || "test_user_id" : "test_user_id"; // Получаем Telegram ID
+
+        console.log('Skills to send:', skillsToSend); // Логируем выбранные навыки
+        console.log('Telegram ID:', telegramID); // Логируем Telegram ID
+
+        // Отправка данных на бэкэнд
+        fetch('https://942d-2a03-32c0-7000-7c7f-5438-a3a3-6420-61eb.ngrok-free.app/api/users/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ skills: skillsToSend }),
+            body: JSON.stringify({ userType: "talent", skills: skillsToSend, telegramID }), // Отправляем userType, skills и telegramID
         })
-        .then(response => response.json())
-        .then(data => {
-            console.log('Success:', data);
+        .then((response) => {
+            if (response.ok) {
+                console.log('Пользователь успешно зарегистрирован');
+                // Можно добавить переход на другую страницу или показать сообщение
+            } else {
+                console.error('Ошибка при регистрации пользователя', response.status);
+            }
         })
         .catch((error) => {
-            console.error('Error:', error);
+            console.error('Ошибка сети:', error);
         });
-        */
     };
 
     return (
@@ -131,9 +139,7 @@ const SkillsPage = () => {
                     )}
                 </div>
                 {selectedSkills.length >= 3 && (
-                    
-                        <button className="continue-button" onClick={handleContinue}>Continue</button>
-                    
+                    <button className="continue-button" onClick={handleContinue}>Continue</button>
                 )}
             </div>
         </div>

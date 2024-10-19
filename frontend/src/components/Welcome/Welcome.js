@@ -13,7 +13,7 @@ const Welcome = () => {
 
     useEffect(() => {
         // Для тестирования пропускаем получение Telegram ID
-        const telegramID = "test_user_id"; // Временный ID для тестирования
+        const telegramID = tg?.initData ? new URLSearchParams(tg.initData).get('user_id') || "test_user_id" : "test_user_id"; // Получаем Telegram ID
 
         console.log('Telegram ID:', telegramID); // Логируем временный Telegram ID
 
