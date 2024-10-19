@@ -12,10 +12,10 @@ const Welcome = () => {
     const navigate = useNavigate(); // Для навигации
 
     useEffect(() => {
-        // Для тестирования пропускаем получение Telegram ID
-        const telegramID = tg?.initData ? new URLSearchParams(tg.initData).get('user_id') || "test_user_id" : "test_user_id"; // Получаем Telegram ID
+        // Получаем Telegram ID, если приложение открыто в Telegram
+        const telegramID = tg?.initDataUnsafe?.user?.id || "123123"; // Если нет реального ID, используем тестовый
 
-        console.log('Telegram ID:', telegramID); // Логируем временный Telegram ID
+        console.log('Telegram ID:', telegramID); // Логируем Telegram ID
 
         // Отправляем запрос на сервер для проверки пользователя
         fetch('https://942d-2a03-32c0-7000-7c7f-5438-a3a3-6420-61eb.ngrok-free.app/api/users/login', {
@@ -23,7 +23,7 @@ const Welcome = () => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ telegramID }), // Отправляем временный Telegram ID
+            body: JSON.stringify({ telegramID }), // Отправляем Telegram ID
         })
         .then((response) => {
             if (response.ok) {
@@ -41,7 +41,7 @@ const Welcome = () => {
         .catch((error) => {
             console.error('Ошибка сети:', error);
         });
-    }, [navigate]);
+    }, [navigate, tg]); // Добавляем tg в зависимости useEffect
 
     // Отображаем загрузку, пока идет проверка
     if (loading) {

@@ -67,7 +67,7 @@ const SkillsPage = () => {
     const handleContinue = () => {
         const userType = "talent"; // Устанавливаем тип пользователя
         const skillsToSend = [...selectedSkills, ...customSkills]; // Объединяем выбранные и кастомные навыки
-        const telegramID = tg?.initData ? new URLSearchParams(tg.initData).get('user_id') || "test_user_id" : "test_user_id"; // Получаем Telegram ID
+        const telegramID = tg?.initDataUnsafe?.user?.id || "123123"; // Получаем Telegram ID или используем тестовый
 
         console.log('Skills to send:', skillsToSend); // Логируем выбранные навыки
         console.log('Telegram ID:', telegramID); // Логируем Telegram ID
@@ -78,7 +78,7 @@ const SkillsPage = () => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ userType: "talent", skills: skillsToSend, telegramID }), // Отправляем userType, skills и telegramID
+            body: JSON.stringify({ userType, skills: skillsToSend, telegramID }), // Отправляем userType, skills и telegramID
         })
         .then((response) => {
             if (response.ok) {
