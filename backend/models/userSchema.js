@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
-    id: {
+    _id: {
         type: String,
         required: true,
         unique: true
@@ -9,17 +9,25 @@ const userSchema = new mongoose.Schema({
     username: {
         type: String,
         required: true
-    },
+    },    
     name: {
         type: String,
         required: true
+    },
+    bio: {
+        type: String,
+        default: ''
     },
     photo: {
         type: String,
         default: ''
     },
-    isEmployer: {
-        type: Boolean,
+    likedIt: {
+        type: [String],
+        default: []
+    },    
+    userType: {
+        type: String,
         required: true
     },
     createdAt: {

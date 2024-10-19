@@ -1,21 +1,18 @@
 const mongoose = require('mongoose');
 
 const vacancySchema = new mongoose.Schema({
-    id: {
-        type: String,
-        required: true,
-        unique: true
-    },
     skills: {
-        type: String,
-        required: true
+        type: [String],
+        default: []
+    },
+    grades: {
+        type: [String],
+        enum: ['Intern', 'Junior', 'Middle', 'Senior', 'Teamlead'],
+        required: true,
+        default: []
     },
     userId: {
-        type: Boolean,
-        required: true
-    },
-    isEmployer: {
-        type: Boolean,
+        type: String,
         required: true
     },
     createdAt: {
