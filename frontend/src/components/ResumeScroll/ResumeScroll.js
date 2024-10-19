@@ -27,7 +27,6 @@ const ResumeScroll = () => {
           method: 'POST', // Изменено на POST
           headers: new Headers({
             'Content-Type': 'application/json',
-            'ngrok-skip-browser-warning': '69420', // Добавляем заголовок
           }),
           body: JSON.stringify({ telegramID }), // Отправляем Telegram ID в теле запроса
         });
