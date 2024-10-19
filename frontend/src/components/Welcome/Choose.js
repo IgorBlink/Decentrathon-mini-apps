@@ -22,24 +22,7 @@ const Choose = () => {
         console.log("Talent button clicked");
     };
 
-    const handleContinue = async () => {
-        setShowNext(true); // Переходим на следующий слайд независимо от результата запроса
-
-        if (userId) {
-            try {
-                const response = await axios.post('https://3c52-62-122-3-219.ngrok-free.app/api/users/login', {
-                    telegramId: userId,
-                    userType: selected, // Добавляем информацию о выбранном типе
-                });
-                console.log('ID успешно отправлен:', response.data);
-            } catch (error) {
-                console.error('Ошибка при отправке ID:', error);
-            }
-        } else {
-            console.error('Telegram ID не найден');
-        }
-    };
-
+    
     // Рендерим либо экран выбора, либо следующий слайд в зависимости от состояния
     if (showNext) {
         if (selected === 'employer') {
