@@ -110,9 +110,8 @@ exports.editSkills = async (req, res) => {
             });
         }
 
-        const newSkills = user.skills === skills ? user.skills : skills;
 
-        user.skills = newSkills
+        user.skills = user.skills === skills ? user.skills : skills;
 
         await user.save();
 
