@@ -12,16 +12,10 @@ const Welcome = () => {
     const navigate = useNavigate(); // Для навигации
 
     useEffect(() => {
-        // Проверяем наличие tg
-        if (!tg) {
-            console.error('Telegram API не инициализирован');
-            return;
-        }
+        // Для тестирования пропускаем получение Telegram ID
+        const telegramID = "test_user_id"; // Временный ID для тестирования
 
-        // Получаем Telegram ID
-        const telegramID = tg.initDataUnsafe.user.id; // Предположим, ID находится здесь
-
-        console.log('Telegram ID:', telegramID); // Логируем Telegram ID
+        console.log('Telegram ID:', telegramID); // Логируем временный Telegram ID
 
         // Отправляем запрос на сервер для проверки пользователя
         fetch('https://942d-2a03-32c0-7000-7c7f-5438-a3a3-6420-61eb.ngrok-free.app/api/users/login', {
@@ -29,25 +23,25 @@ const Welcome = () => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ telegramID }), // Отправляем Telegram ID
+            body: JSON.stringify({ telegramID }), // Отправляем временный Telegram ID
         })
-            .then((response) => {
-                if (response.ok) {
-                    // Если пользователь существует, перенаправляем на страницу резюме
-                    navigate('/resumes');
-                } else if (response.status === 404) {
-                    // Если пользователь не существует, показываем Welcome Page
-                    console.log('Пользователь не найден, показываем Welcome Page');
-                    setLoading(false); // Меняем состояние загрузки
-                } else {
-                    // Обработка других возможных статусов
-                    console.error('Ошибка при проверке пользователя', response.status);
-                }
-            })
-            .catch((error) => {
-                console.error('Ошибка сети:', error);
-            });
-    }, [tg, navigate]);
+        .then((response) => {
+            if (response.ok) {
+                // Если пользователь существует, перенаправляем на страницу резюме
+                navigate('/resumes');
+            } else if (response.status === 404) {
+                // Если пользователь не существует, показываем Welcome Page
+                console.log('Пользователь не найден, показываем Welcome Page');
+                setLoading(false); // Меняем состояние загрузки
+            } else {
+                // Обработка других возможных статусов
+                console.error('Ошибка при проверке пользователя', response.status);
+            }
+        })
+        .catch((error) => {
+            console.error('Ошибка сети:', error);
+        });
+    }, [navigate]);
 
     // Отображаем загрузку, пока идет проверка
     if (loading) {
