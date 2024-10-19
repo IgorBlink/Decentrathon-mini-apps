@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './Welcome.css'; // Используем стили отсюда
 import { useTelegram } from '../../TelegramContext'; // Импортируйте хук
+import End from './End'; // Импортируем компонент End
 
 const SkillsPage = () => {
     const { tg } = useTelegram(); // Получаем Telegram API
@@ -14,60 +15,61 @@ const SkillsPage = () => {
     ];
 
     const [selectedSkills, setSelectedSkills] = useState([]);
-    const [customSkills, setCustomSkills] = useState([]); // Для хранения кастомных скиллов
+    const [customSkills, setCustomSkills] = useState([]);
     const [customSkill, setCustomSkill] = useState('');
-    const [suggestions, setSuggestions] = useState([]); // Для хранения предложений
+    const [suggestions, setSuggestions] = useState([]); 
+    const [showChoosePage, setShowendPage] = useState(false);
+
+   
+
+    if (showChoosePage) {
+        return <End />;
+    }
 
     const toggleSkillSelection = (skill) => {
         setSelectedSkills((prevSelected) =>
             prevSelected.includes(skill)
-                ? prevSelected.filter((s) => s !== skill) // Удаляем скилл, если он уже выбран
-                : [...prevSelected, skill] // Добавляем скилл, если он еще не выбран
+                ? prevSelected.filter((s) => s !== skill)
+                : [...prevSelected, skill]
         );
     };
 
     const handleCustomSkillInputChange = (e) => {
         const value = e.target.value;
         setCustomSkill(value);
-
-        // Отфильтровываем предложенные скиллы на основе ввода пользователя
+        // Логика для фильтрации предложений
         if (value) {
-            const filteredSuggestions = [
-                'F#', 'Haskell', 'Lua', 'MATLAB', 'R', 'COBOL', 'Dart', 'Pascal', 'Scratch', 
-                'Crystal', 'Smalltalk', 'Prolog', 'OCaml', 'Elm', 'Erlang', 'Assembly', 
-                'ActionScript', 'XSLT', 'PL/SQL', 'AWK', 'Tcl', 'J', 'ABAP', 'Pike', 'Nim'
-            ].filter(skill =>
+            const filteredSuggestions = ['F#', 'Haskell', 'Lua', 'MATLAB', 'R', 'COBOL', 'Dart', 'Pascal', 'Scratch'].filter(skill =>
                 skill.toLowerCase().includes(value.toLowerCase())
             );
             setSuggestions(filteredSuggestions);
         } else {
-            setSuggestions([]); // Если поле ввода пустое, очищаем предложения
+            setSuggestions([]);
         }
     };
 
     const handleSkillSelect = (skill) => {
         if (!selectedSkills.includes(skill) && !customSkills.includes(skill)) {
-            setCustomSkills([...customSkills, skill]); // Добавляем новый кастомный скилл
-            setSelectedSkills([...selectedSkills, skill]); // Также добавляем его в выбранные скиллы
+            setCustomSkills([...customSkills, skill]);
+            setSelectedSkills([...selectedSkills, skill]);
         }
-        setCustomSkill(''); // Очищаем поле ввода
-        setSuggestions([]); // Убираем предложения после выбора
+        setCustomSkill('');
+        setSuggestions([]);
     };
 
     const handleCustomSkillToggle = (skill) => {
         setCustomSkills((prevCustomSkills) =>
-            prevCustomSkills.filter((s) => s !== skill) // Удаляем кастомный скилл из списка
+            prevCustomSkills.filter((s) => s !== skill)
         );
         setSelectedSkills((prevSelected) =>
-            prevSelected.filter((s) => s !== skill) // Удаляем его также из выбранных
+            prevSelected.filter((s) => s !== skill)
         );
     };
 
-    // Функция для получения выбранных навыков в виде массива
     const handleContinue = () => {
         const userType = "talent"; // Устанавливаем тип пользователя
         const skillsToSend = [...selectedSkills, ...customSkills]; // Объединяем выбранные и кастомные навыки
-        const telegramID = tg?.initDataUnsafe?.user?.id || "123123"; // Получаем Telegram ID или используем тестовый
+        const telegramID = tg?.initDataUnsafe?.user?.id || 803817300; // Получаем Telegram ID или используем тестовый
 
         console.log('Skills to send:', skillsToSend); // Логируем выбранные навыки
         console.log('Telegram ID:', telegramID); // Логируем Telegram ID
@@ -78,11 +80,11 @@ const SkillsPage = () => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ userType, skills: skillsToSend, telegramID }), // Отправляем userType, skills и telegramID
+            body: JSON.stringify({ telegramID, userType, skills: skillsToSend,  }), // Отправляем userType, skills и telegramID
         })
         .then((response) => {
             if (response.ok) {
-                console.log('Пользователь успешно зарегистрирован');
+                setShowendPage(true);
                 // Можно добавить переход на другую страницу или показать сообщение
             } else {
                 console.error('Ошибка при регистрации пользователя', response.status);
@@ -99,7 +101,6 @@ const SkillsPage = () => {
                 <h1 className="talents-title">Choose your talents</h1>
                 <h2 className="subtitle">Please select at least 3 skills</h2>
                 <div className="talents-skills-container">
-                    {/* Рендерим существующие скиллы */}
                     {initialSkills.map((skill, index) => (
                         <div
                             key={index}
@@ -109,12 +110,11 @@ const SkillsPage = () => {
                             {skill}
                         </div>
                     ))}
-                    {/* Рендерим кастомные скиллы */}
                     {customSkills.map((skill, index) => (
                         <div
                             key={`custom-${index}`}
-                            className={`talents-skill selected`} // Кастомные скиллы по умолчанию будут выделены
-                            onClick={() => handleCustomSkillToggle(skill)} // Де-селект кастомного скилла
+                            className={`talents-skill selected`}
+                            onClick={() => handleCustomSkillToggle(skill)}
                         >
                             {skill}
                         </div>

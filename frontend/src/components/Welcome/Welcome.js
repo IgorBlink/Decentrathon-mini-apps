@@ -13,7 +13,7 @@ const Welcome = () => {
 
     useEffect(() => {
         // Получаем Telegram ID, если приложение открыто в Telegram
-        const telegramID = tg?.initDataUnsafe?.user?.id || "123123"; // Если нет реального ID, используем тестовый
+        const telegramID = tg?.initDataUnsafe?.user?.id || 11211872747; // Если нет реального ID, используем тестовый
 
         console.log('Telegram ID:', telegramID); // Логируем Telegram ID
 
