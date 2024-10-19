@@ -22,7 +22,11 @@ const Choose = () => {
         console.log("Talent button clicked");
     };
 
-    
+    const handleContinue = async () => {
+        setShowNext(true); // Переходим на следующий слайд независимо от результата запроса
+
+    }
+
     // Рендерим либо экран выбора, либо следующий слайд в зависимости от состояния
     if (showNext) {
         if (selected === 'employer') {
